@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <style>
+		#map {
+        height: 70%;
+        width:70%;
+        }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+	   var uluru = {lat: 24.994293, lng: 121.302708};
+        var map = new google.maps.Map(document.getElementById('map'), {
+		  //zoom數值越大地圖比例尺越大,涵蓋範圍越小
+          zoom: 13,
+          center: uluru,
+		  //to hid other business point.
+		  styles:[{
+            featureType: 'poi.business',
+            stylers: [{visibility: 'off'}]
+          }]
+        });
+		//建立地圖 marker 的集合
+		var markers = [];
+		var marker_config = [{
+			position: {lat: 24.994455, lng: 121.337331},
+			map: map,
+			title:'金味越南小館'
+		},{
+			position: {lat: 24.985067, lng: 121.318382},
+			map: map,
+			title:'重慶手工酸辣粉'
+		},{
+			position: {lat: 24.994448, lng: 121.311313},
+			map: map,
+			title:'微草'
+		},{
+			position: {lat: 24.981821, lng: 121.271281},
+			map: map,
+			title:'水餃小棧'
+		},{
+			position: {lat: 24.983826, lng:  121.318305},
+			map: map,
+			title:'家淶自助餐'
+		},{
+			position: {lat: 24.997452, lng: 121.302466},
+			map: map,
+			title:'雲．貴．川．蜀麻辣食材批發'
+		},{
+			position: {lat: 24.997603, lng:  121.302447},
+			map: map,
+			title:'廣東腸粉'
+		},{
+			position: {lat: 24.964659, lng:  121.261269},
+			map: map,
+			title:'Mimosa泰式料理'
+		},{
+			position: {lat: 24.968273, lng:  121.305526},
+			map: map,
+			title:'食鼎香'
+		},{
+			position: {lat: 24.966112, lng:  121.215701},
+			map: map,
+			title:'滷味武漢的鴨'
+		},{
+			position: {lat: 24.957034, lng:  121.239729},
+			map: map,
+			title:'傳渝重慶小麵'
+		},{
+			position: {lat: 24.951617, lng:  121.230732},
+			map: map,
+			title:'阿華肉來饃'
+		},{
+			position: {lat: 24.950061, lng:  121.229359},
+			map: map,
+			title:'涂記手工腸粉'
+		},{
+			position: {lat: 24.932809, lng:  121.254986},
+			map: map,
+			title:'萬家老街豬腳'
+		},{
+			position: {lat: 24.979042, lng:  121.254206},
+			map: map,
+			title:'忠貞雲南米干'
+		},{
+			position: {lat: 24.959784, lng:  121.221824},
+			map: map,
+			title:'手工雞蛋糕/各式飲料'
+		},{
+			position: {lat: 25.044169, lng:  121.292682},
+			map: map,
+			title:'俊.麵食'
+		},{
+			position: {lat: 25.044332, lng:  121.277152},
+			map: map,
+			title:'紫莉幸孕中心'
+		},{
+			position: {lat: 25.046001, lng:  121.295285},
+			map: map,
+			title:'雲珍館'
+		},{
+			position: {lat: 25.044348, lng:  121.293083},
+			map: map,
+			title:'8鍋臭臭鍋連鎖餐飲'
+		},{
+			position: {lat: 24.946670, lng:  121.202101},
+			map: map,
+			title:'老周牌燒肉飯'
+		},{
+			position: {lat: 24.949797, lng:  121.211019},
+			map: map,
+			title:'米咖啡'
+		},{
+			position: {lat: 24.949735, lng:  121.212681},
+			map: map,
+			title:'川耗仔'
+		},{
+			position: {lat: 24.902449, lng:  121.279461},
+			map: map,
+			title:'鍬記'
+		},{
+			position: {lat: 24.884116, lng:  121.288849},
+			map: map,
+			title:'萬家老街豬腳'
+		},{
+			position: {lat: 24.956252, lng:  121.299345},
+			map: map,
+			title:'糧全食美'
+		},{
+			position: {lat: 25.046044, lng:  121.141676},
+			map: map,
+			title:'姚媽媽家鄉味'
+		}];
+
+		//標出 marker
+		marker_config.forEach(function(e,i){
+			markers[i] = new google.maps.Marker(e);
+			markers[i].setMap(map);
+		});  
+		/* anothor way to hid other business point.
+		map.setOptions({styles:[{
+            featureType: 'poi.business',
+            stylers: [{visibility: 'off'}]
+          }]});
+		  */
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5G9Bm78DnzsaQlbcr4QReUy1gK6dxkr0&callback=initMap">
+    </script>
+  </body>
+</html>
