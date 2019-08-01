@@ -2,14 +2,15 @@
   <head>
     <style>
 		#map {
-        height: 70%;
-        width:70%;
+        height: 80%;
+        width:80%;
         }
     </style>
   </head>
   <body>
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
+	<script type="text/javascript" src="infowindow.js"></script>
     <script>
       function initMap() {
 	   var uluru = {lat: 24.994293, lng: 121.302708};
@@ -50,7 +51,7 @@
 			map: map,
 			title:'雲．貴．川．蜀麻辣食材批發'
 		},{
-			position: {lat: 24.997603, lng:  121.302447},
+			position: {lat: 24.992061, lng:  121.308169},
 			map: map,
 			title:'廣東腸粉'
 		},{
@@ -69,10 +70,6 @@
 			position: {lat: 24.957034, lng:  121.239729},
 			map: map,
 			title:'傳渝重慶小麵'
-		},{
-			position: {lat: 24.951617, lng:  121.230732},
-			map: map,
-			title:'阿華肉來饃'
 		},{
 			position: {lat: 24.950061, lng:  121.229359},
 			map: map,
@@ -129,16 +126,23 @@
 			position: {lat: 24.956252, lng:  121.299345},
 			map: map,
 			title:'糧全食美'
-		},{
-			position: {lat: 25.046044, lng:  121.141676},
-			map: map,
-			title:'姚媽媽家鄉味'
 		}];
-
+		var infowindow = [];
 		//標出 marker
+		
 		marker_config.forEach(function(e,i){
+		
+			infowindow[i] = new google.maps.InfoWindow({
+			content: shopmark[i],
+			maxWidth:450
+		});
 			markers[i] = new google.maps.Marker(e);
 			markers[i].setMap(map);
+			
+			markers[i].addListener('click', function() {
+			infowindow[i].open(map, markers[i]);
+			});
+			
 		});  
 		/* anothor way to hid other business point.
 		map.setOptions({styles:[{
@@ -146,6 +150,19 @@
             stylers: [{visibility: 'off'}]
           }]});
 		  */
+		var contentString ='<h3><a href="https://www.google.com.tw/maps/place/%E9%87%91%E5%91%B3%E8%B6%8A%E5%8D%97%E5%B0%8F%E9%A4%A8/@24.9938982,121.3373022,15z/data=!4m19!1m13!4m12!1m4!2m2!1d121.2964864!2d24.9929728!4e1!1m6!1m2!1s0x34681e89f7abe9a3:0x8c94f8d7885fff8d!2z6YeR5ZGz6LaK5Y2X5bCP6aSo!2m2!1d121.3372809!2d24.9939011!3m4!1s0x0:0x8c94f8d7885fff8d!8m2!3d24.9939008!4d121.3372806">金味越南小館</a></h3>'
+		+'<img src="https://lh5.googleusercontent.com/p/AF1QipOJ0XI_IDiqKuTVB3NReHFsyR-ojjy5jCBsfCiq=w408-h306-k-no"/>'
+		/*
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString,
+			maxWidth:450
+		});
+		
+		markers[0].addListener('click', function() {
+			infowindow.open(map, markers[0]);
+		});
+		*/
+		
       }
     </script>
     <script async defer
