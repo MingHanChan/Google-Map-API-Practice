@@ -55,5 +55,13 @@ var map = new google.maps.Map(document.getElementById('map'),{
 });
 ```
  - 放置標記(marker)
+ 標記的基本語法如下
+	```
+	var marker = new google.maps.Marker({ 
+	    position: 放標記的經緯度, 
+	   	map: 放標記的地圖 
+	});
+	```
+
 開啟後就會看到地圖如下
 ![](https://github.com/MingHanChan/Google-Map-API-Practice/blob/master/Image/6.png)
