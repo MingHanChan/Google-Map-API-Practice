@@ -22,23 +22,38 @@
 
 
 ##### 三、開始使用Maps JavaScript API
-新增一個html頁面，引用maps的javascript:   　
+新增一個html頁面，引用Google Maps API的JavaScript，接著把接著把API key嵌入在網址```key=YOUR_API_KEY```裡
 ```
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"</script>
 ```   
 
-然後也要為地圖設立css樣式的寬跟高，不然不知道要顯示多大的地圖    
+然後也要為地圖設立css樣式的寬跟高，不然不知道初始化要顯示多大的地圖    
 ```
 <style>
 		#map {
         height: 70%;
         width:70%;
         }
-    </style>
+</style>
 ```
-     
-另外，在html裡<div id="map"></div>是必要的元素!還需要給地圖一組經緯度，以作為地圖的中心　　　　
+另外，在html裡 ``` <div id="map"> </div>```是必要的元素！因為要有一個容器標籤來裝地圖，還需要給地圖一組經緯度，以作為地圖的中心。
 
-初始化地圖(initMap)的function，做2件事:   
--建立地圖，設定地圖中心點
--放置標記(marker)
+在初始化地圖(initMap)的function，做2件事:   
+ - 建立地圖，設定地圖中心點
+ 這邊要給一組經緯度來當作初始地圖的中心點，如下面程式碼
+```
+var uluru = {lat: 24.994293, lng: 121.302708};
+var map = new google.maps.Map(document.getElementById('map'),{
+		  //放大倍率 zoom數值越大地圖比例尺越大,涵蓋範圍越小
+          zoom: 13,
+          center: uluru,
+		  //to hid other business point.
+		  styles:[{
+            featureType: 'poi.business',
+            stylers: [{visibility: 'off'}]
+          }]
+});
+```
+ - 放置標記(marker)
+開啟後就會看到地圖如下
+![](https://github.com/MingHanChan/Google-Map-API-Practice/blob/master/Image/6.png)
