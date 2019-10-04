@@ -12,10 +12,11 @@
     <div id="map"></div>
 	<script type="text/javascript" src="infowindow.js"></script>
     <script>
+	  var uluru,map,markers,marker_config,infowindow,self_pos
       function initMap() {
-	   var uluru = {lat: 24.994293, lng: 121.302708};
-        var map = new google.maps.Map(document.getElementById('map'), {
-		  //zoom數值越大地圖比例尺越大,涵蓋範圍越小
+		uluru = {lat: 24.994293, lng: 121.302708};
+        map = new google.maps.Map(document.getElementById('map'), {
+		  //放大倍率 zoom數值越大地圖比例尺越大,涵蓋範圍越小
           zoom: 13,
           center: uluru,
 		  //to hid other business point.
@@ -24,9 +25,23 @@
             stylers: [{visibility: 'off'}]
           }]
         });
+		self_pos = new google.maps.InfoWindow;
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            self_pos.setPosition(pos);
+			self_pos.setContent('現在位置.');
+			self_pos.open(map);
+            map.setCenter(pos);
+			map.setZoom(16);
+          });
+        }
 		//建立地圖 marker 的集合
-		var markers = [];
-		var marker_config = [{
+		markers = [];
+		marker_config = [{
 			position: {lat: 24.994455, lng: 121.337331},
 			map: map,
 			title:'金味越南小館'
@@ -127,7 +142,7 @@
 			map: map,
 			title:'糧全食美'
 		}];
-		var infowindow = [];
+		infowindow = [];
 		//標出 marker
 		
 		marker_config.forEach(function(e,i){
