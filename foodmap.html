@@ -12,18 +12,103 @@
     <div id="map"></div>
 	<script type="text/javascript" src="infowindow.js"></script>
     <script>
-	  var uluru,map,markers,marker_config,infowindow,self_pos
-      function initMap() {
+	  var uluru,map,markers,marker_config,infowindow,self_pos;
+		var night_mode = [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            },
+			{
+            featureType: 'poi.business',
+            stylers: [{visibility: 'off'}]
+			}
+          ];
+		  var day_mode = [{
+            featureType: 'poi.business',
+            stylers: [{visibility: 'off'}]
+          }];
+	  function initMap() {
 		uluru = {lat: 24.994293, lng: 121.302708};
         map = new google.maps.Map(document.getElementById('map'), {
 		  //放大倍率 zoom數值越大地圖比例尺越大,涵蓋範圍越小
           zoom: 13,
           center: uluru,
 		  //to hid other business point.
-		  styles:[{
-            featureType: 'poi.business',
-            stylers: [{visibility: 'off'}]
-          }]
+		  styles:new Date().getHours() > 17 ? night_mode:day_mode,
         });
 		self_pos = new google.maps.InfoWindow;
         if (navigator.geolocation) {
@@ -159,25 +244,6 @@
 			});
 			
 		});  
-		/* anothor way to hid other business point.
-		map.setOptions({styles:[{
-            featureType: 'poi.business',
-            stylers: [{visibility: 'off'}]
-          }]});
-		  */
-		var contentString ='<h3><a href="https://www.google.com.tw/maps/place/%E9%87%91%E5%91%B3%E8%B6%8A%E5%8D%97%E5%B0%8F%E9%A4%A8/@24.9938982,121.3373022,15z/data=!4m19!1m13!4m12!1m4!2m2!1d121.2964864!2d24.9929728!4e1!1m6!1m2!1s0x34681e89f7abe9a3:0x8c94f8d7885fff8d!2z6YeR5ZGz6LaK5Y2X5bCP6aSo!2m2!1d121.3372809!2d24.9939011!3m4!1s0x0:0x8c94f8d7885fff8d!8m2!3d24.9939008!4d121.3372806">金味越南小館</a></h3>'
-		+'<img src="https://lh5.googleusercontent.com/p/AF1QipOJ0XI_IDiqKuTVB3NReHFsyR-ojjy5jCBsfCiq=w408-h306-k-no"/>'
-		/*
-		var infowindow = new google.maps.InfoWindow({
-			content: contentString,
-			maxWidth:450
-		});
-		
-		markers[0].addListener('click', function() {
-			infowindow.open(map, markers[0]);
-		});
-		*/
-		
       }
     </script>
     <script async defer
